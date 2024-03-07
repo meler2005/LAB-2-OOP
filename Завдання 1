@@ -1,0 +1,62 @@
+using System;
+
+namespace ArrayExtensions
+{
+    // Клас, який містить методи розширення для масивів цілих чисел
+    public static class ArrayExtensions
+    {
+        // Метод розширення для обчислення середнього арифметичного
+        public static double Average(this int[] array)
+        {
+            // Перевірка на те, що масив не порожній
+            if (array.Length == 0)
+                throw new InvalidOperationException("Масив повинен бути не порожнім.");
+
+            double sum = 0;
+            // Обчислення суми елементів масиву
+            foreach (int num in array)
+            {
+                sum += num;
+            }
+            // Повернення середнього арифметичного
+            return sum / array.Length;
+        }
+
+        // Метод розширення для обчислення середнього геометричного
+        public static double GeometricMean(this int[] array)
+        {
+            // Перевірка на те, що масив не порожній
+            if (array.Length == 0)
+                throw new InvalidOperationException("Масив повинен бути не порожнім.");
+
+            double product = 1;
+            // Обчислення добутку елементів масиву
+            foreach (int num in array)
+            {
+                product *= num;
+            }
+            // Повернення середнього геометричного
+            return Math.Pow(product, 1.0 / array.Length);
+        }
+    }
+
+    // Головний клас програми
+    class Program
+    {
+        // Точка входу у програму
+        static void Main(string[] args)
+        {
+            // Масив цілих чисел
+            int[] numbers = { 1, 2, 3, 4, 5 };
+
+            // Обчислення середнього арифметичного
+            double arithmeticMean = numbers.Average();
+            // Обчислення середнього геометричного
+            double geometricMean = numbers.GeometricMean();
+
+            // Виведення результатів на консоль
+            Console.WriteLine("Середнє арифметичне: " + arithmeticMean);
+            Console.WriteLine("Середнє геометричне: " + geometricMean);
+        }
+    }
+}
