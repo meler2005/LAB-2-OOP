@@ -1,0 +1,100 @@
+using System;
+using System.Diagnostics.Tracing;
+using System.Xml.Linq;
+
+class ResurcesDepartament
+{
+    private static int counter = 0;
+
+    private string surname;
+    private string initials;
+    private string date;
+    private string salary;
+
+    public ResurcesDepartament(string surname, string initials, string date, string salary)
+    {
+        this.surname = surname;
+        this.initials = initials;
+        this.date = date;
+        this.salary = salary;
+
+        counter++;
+    }
+
+    ~ResurcesDepartament()
+    {
+        counter--;
+    }
+
+    public static int Counter
+    {
+        get { return counter; }
+    }
+    public string Surname
+    {
+        get { return surname; }
+        set { surname = value; }
+    }
+    public string Initials
+    {
+        get { return initials; }
+        set { initials = value; }
+    }
+    public string Date
+    {
+        get { return date; }
+        set { date = value; }
+    }
+    public string Salary
+    {
+        get { return salary; }
+        set { salary = value; }
+    }
+
+    public override string ToString()
+    {
+        return $"{Surname}\t{Initials}\t\t{Date}\t\t{Salary}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        ResurcesDepartament[] arr = new ResurcesDepartament[]
+        {
+            new ResurcesDepartament("Сидоров\t", "І.І.", "1985", "523.10"),
+            new ResurcesDepartament("Павленко", "П.П.", "1967", "318.25"),
+            new ResurcesDepartament("Коваленко", "М.С.", "1979", "420.50"),
+            new ResurcesDepartament("Литвиненко", "Ф.З.", "2002", "275.75"),
+            new ResurcesDepartament("Черватюк", "І.С.", "2000", "677.50"),
+            new ResurcesDepartament("Білоус\t", "А.І.", "1989", "418.40"),
+            new ResurcesDepartament("Мелимука", "І.В.", "1978", "127.50"),
+            new ResurcesDepartament("Кравченко", "К.Л.", "1983", "375.60"),
+            new ResurcesDepartament("Михайленко", "А.А.", "1962", "312.45"),
+            new ResurcesDepartament("Петренко", "Т.І.", "1967", "589.30"),
+            new ResurcesDepartament("Сергієнко", "І.Б.", "1972", "544.75")
+
+        };
+
+        Console.WriteLine("Surname:\tInitials:\tBirthday:\tSalary:");
+        for (int i = 0; i < ResurcesDepartament.Counter; i++)
+            Console.WriteLine(arr[i].ToString());
+
+        Console.WriteLine("\nРобітники, що народились після 1990:");
+        for (int i = 0; i < ResurcesDepartament.Counter; i++)
+        {
+            if (int.TryParse(arr[i].Date, out int date))
+            {
+                if (date > 1990)
+                    Console.WriteLine(arr[i].ToString());
+            }
+        }
+
+        Console.WriteLine($"\nКількість обєктів: {ResurcesDepartament.Counter}");
+        if (ResurcesDepartament.Counter > 10)
+            Console.WriteLine("Кількість обєктів більше 10");
+        else
+            Console.WriteLine("Кількість обєктів не більше 10");
+    }
+}
